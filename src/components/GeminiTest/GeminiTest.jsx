@@ -56,6 +56,13 @@ export default function GeminiTest({ model }) {
     return prompt;
   };
 
+  const softwaresInString = (currentSoftware) =>
+    currentSoftware.reduce(
+      (total, current) =>
+        current.checked ? `${total} ${current.name}` : total,
+      ""
+    );
+
   const formatBusinessData = (params) => {
     const {
       businessType,
@@ -76,11 +83,12 @@ export default function GeminiTest({ model }) {
       ${timeConsumingTasks}
       
       Current Software/Tools:
-      ${currentSoftware}
+      ${softwaresInString(currentSoftware)}
     `;
   };
 
   const analyzeWithGemini = async (params, isRegenerate = false) => {
+
     try {
       setLoading(true);
       setShowForm(false);
@@ -88,7 +96,7 @@ export default function GeminiTest({ model }) {
 
       // Store params for potential regeneration
       if (!isRegenerate) {
-        setBusinessParams(params);
+        setBusinessParams({...params, currentSoftware: softwaresInString(params.currentSoftware)});
       }
 
       const businessData = formatBusinessData(params);
