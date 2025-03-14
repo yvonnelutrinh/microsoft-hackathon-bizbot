@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import "./FormComponent.scss";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 function FormComponent({ handleSubmit, loading }) {
   const softwares = [
 		{ name: "Outlook", checked: false },
@@ -100,9 +99,10 @@ function FormComponent({ handleSubmit, loading }) {
 	};
 
   return (
+    <>
     <div className="page">
       {/* ✅ Dynamically adjust width */}
-      <Link><img className="logo"></img></Link>
+      <Link><img src="/src/assets/LogoSmall.png" className="logo"></img></Link>
       <div 
         className="page_front" 
         style={{ width: `${pageWidth}px` }}
@@ -111,7 +111,7 @@ function FormComponent({ handleSubmit, loading }) {
         <h1>
           {businessType
             ? `AI Advisor for ${businessType}`
-            : "Small Business AI Advisor"}
+            : "BIZBOT.AI - Small Business AI Advisor"}
         </h1>
 
         <p>
@@ -126,7 +126,7 @@ function FormComponent({ handleSubmit, loading }) {
           {/* ✅ Update form dynamically */}
           <div className="main_title_section">
             <div className="main_title_section_Business">
-              <label className="main_title_section_Business_title">
+              <label className="main_title_section_employee_title">
                 Business Type
               </label>
               <select
@@ -164,7 +164,7 @@ function FormComponent({ handleSubmit, loading }) {
 
           <div>
             <div className="main_title_section_time">
-              <label className="main_title_section_revenue_title">
+              <label className="main_title_section_employee_title">
                 Annual Revenue
               </label>
               <select
@@ -248,7 +248,7 @@ function FormComponent({ handleSubmit, loading }) {
           </button>
         </div>
       </div>
-      </div>
+      </>
   );
 }
 
