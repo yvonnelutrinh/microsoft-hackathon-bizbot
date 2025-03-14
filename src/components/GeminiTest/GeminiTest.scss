@@ -5,7 +5,7 @@ button {
     border-radius: 999em;
     transition: background-color 0.3s ease;
     color: gray;
-    @include LabelTablet;
+    // @include LabelTablet;
     &:hover {
         background-color: #4472CA;
         color: white;
