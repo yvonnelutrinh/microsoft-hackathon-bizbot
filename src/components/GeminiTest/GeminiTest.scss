@@ -1,0 +1,13 @@
+button {
+    padding: 11px 22px;
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 999em;
+    transition: background-color 0.3s ease;
+    color: gray;
+    @include LabelTablet;
+    &:hover {
+        background-color: #4472CA;
+        color: white;
+    }
+}
