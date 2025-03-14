@@ -2,7 +2,8 @@ import React from "react";
 import "./ReportComponent.scss";
 
 function ReportComponent({ result }) {
-  console.log(result);
+  console.log(result); 
+  //if result starts with ```html and ends with ```
   return (
     <div>
       <h2>Your AI Recommendations</h2>

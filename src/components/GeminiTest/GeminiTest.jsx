@@ -46,7 +46,13 @@ export default function GeminiTest({ model }) {
               5. Simple Implementation Steps
               6. Microsoft Resources for Ethical AI Use
               
-              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources. Return your response in a valid div element that can be directly injected into html do not prompt the response with "html". I want a clean input with just your answers. Feel free to add style font-weight: bold int the element style attribute where you have asterisks. Keep in mind that this is going to be displayed on a website and eventually printed to a PDF. Do not post any links you are not sure of. Thanks.
+              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources. Return your response in a valid div element that can be directly injected into html do not prompt the response with "html".  Formatting Rules:
+
+Do not use triple backticks or markdown (\`\`\`html).
+Use <div style="font-weight: bold"> instead of asterisks (**text**).
+Return clean HTML without unnecessary wrapping or extra formatting.
+Use <ul> or <ol> along with <li> tags when for listing things. Very important!!
+Make use of headings You have a h1 which is great but you want to add a h2 also to highlight important tasks. Very important!!
               
               Add this to your response format in html too:
               Microsoft is deeply committed to developing and deploying AI responsibly, guided by a set of ethical principles. Here are some key aspects of their approach:
