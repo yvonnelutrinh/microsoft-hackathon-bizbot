@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./GeminiTest.scss";
 
+
 export default function GeminiTest({ model }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -64,22 +65,21 @@ export default function GeminiTest({ model }) {
     `;
 
     try {
-      const prompt = `You are an AI consultant specializing in Microsoft-powered business solutions. Analyze the provided small business data and deliver a structured AI integration plan to enhance productivity, reduce costs, and improve decision-making. Focus on solutions that integrate with Microsoft's ecosystem, ensuring responsible and ethical AI adoption.
-
-Business Data:
-${businessData}
-
-Structure your response as follows:
-
-Business Overview & Key Challenges – Summarize the business type, industry, and its primary challenges.
-Top 3 AI Opportunities – Identify three practical AI-driven solutions to improve efficiency, reduce costs, or enhance decision-making.
-Recommended Microsoft Tools & Services – Specify exact Microsoft products (e.g., Power Automate, Dynamics 365, Azure OpenAI) that best fit the business needs. Avoid generic responses.
-Implementation Roadmap (Step-by-Step) – Provide a simplified action plan for integrating these solutions.
-Expected ROI & Measurable Impact – Explain how AI will save time/money and provide key performance indicators (KPIs) to track success.
-Responsible AI & Continuous Improvement – Recommend Microsoft’s responsible AI tools and frameworks (e.g., Microsoft Responsible AI Standard, Azure AI Content Safety). Suggest ways to monitor AI’s impact over time and collect user feedback.
-Your response must be wrapped in a valid <div> element with minimal styling for easy integration into a website. Bold key takeaways using style="font-weight: bold". Ensure the output is concise, actionable, and professional, suitable for website display and PDF export.`;
-
-      const response = await model.generateContent(prompt);
+        const prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
+              
+              ${businessData}
+              
+              Structure your response with these sections:
+              1. Overview of Business Needs
+              2. Top 3 AI Opportunities
+              3. Recommended Microsoft Tools (be specific with product names do not be generic)
+              4. Expected Benefits & ROI
+              5. Simple Implementation Steps
+              6. Microsoft Resources for Ethical AI Use
+              
+              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources. Return your response in a valid div element that can be directly injected into html do not prompt the response with "html". I want a clean input with just your answers. Feel free to add style font-weight: bold int the element style attribute where you have asterisks. Keep in mind that this is going to be displayed on a website and eventually printed to a PDF.`
+      
+              const response = await model.generateContent(prompt);
 
       const data = response.response.text();
       setResult(data);
@@ -200,7 +200,7 @@ Your response must be wrapped in a valid <div> element with minimal styling for 
       {result && (
         <div>
           <h2>Your AI Recommendations</h2>
-          <div dangerouslySetInnerHTML={{ __html: result }}></div>
+          <div dangerouslySetInnerHTML={{__html: result}}></div>
           <div>
             <button
               onClick={() => {
