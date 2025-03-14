@@ -102,7 +102,7 @@ function FormComponent({ handleSubmit, loading }) {
     <>
     <div className="page">
       {/* ✅ Dynamically adjust width */}
-      <Link><img src="/src/assets/LogoSmall.png" className="logo"></img></Link>
+      <Link to={"/"}><img src="/src/assets/LogoSmall.png" className="logo"></img></Link>
       <div 
         className="page_front" 
         style={{ width: `${pageWidth}px` }}
