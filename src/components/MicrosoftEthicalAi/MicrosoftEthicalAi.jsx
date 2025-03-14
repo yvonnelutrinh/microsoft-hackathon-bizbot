@@ -34,12 +34,12 @@ export default function MicrosoftEthicalAI() {
       </p>
       <ul>
         <li>
-          <a href="https://www.microsoft.com/en-us/ai/responsible-ai">
+          <a target="_blank" href="https://www.microsoft.com/en-us/ai/responsible-ai">
             Responsible AI
           </a>
         </li>
         <li>
-          <a href="https://www.microsoft.com/en-us/ai/ai-principles">
+          <a target="_blank" href="https://www.microsoft.com/en-us/ai/ai-principles">
             AI Principles
           </a>{" "}
         </li>
