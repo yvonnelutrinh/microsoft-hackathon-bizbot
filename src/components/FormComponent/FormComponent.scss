@@ -1,3 +1,20 @@
 .main_title{
     font-size: 72px;
 }
+.main{
+    
+}
+.main_title_section_Business_title{
+    font-size: 31px;    
+}
+.page{
+    display: flex;
+    justify-content: center;
+    padding-top:72px;
+    background-color: #0A369D;
+    &_front{
+        background-color: white;
+        border-radius: 2px  ;
+
+    }
+}
