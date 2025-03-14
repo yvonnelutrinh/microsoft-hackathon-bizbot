@@ -76,7 +76,7 @@ export default function GeminiTest({ model }) {
       ${timeConsumingTasks}
       
       Current Software/Tools:
-      ${currentSoftware}
+      ${softwaresInString()}
     `;
   };
 
