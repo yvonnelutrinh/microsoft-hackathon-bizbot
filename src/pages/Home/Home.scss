@@ -1,9 +1,10 @@
 // Variables
 $primary-color: #0047ab; // Royal blue like in your mockup
 $secondary-color: #4682b4; // Steel blue
+$microsoft-blue: #0078D4;
 $accent-color: #3466ff; // Bright blue for buttons and highlights
 $text-color: #333333;
-$light-color: #ffffff;
+$light-color: #ffffff; 
 $background-color: #f5f8fc;
 $container-width: 1200px;
 $border-radius: 1rem;
@@ -150,8 +151,6 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       min-height: 80vh;
       @include flex-center;
       padding: 2rem;
-      // position: relative;
-      // overflow: hidden;
 
       text-align: center;
       gap: 3rem;
@@ -160,6 +159,17 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         @include flex-column;
         align-items: center;
         height: 100%;
+
+        .brand-name {
+          color: $microsoft-blue;
+          padding: .75rem .75rem;
+          margin: .25rem .5rem;
+          border-radius: 1.5rem;
+          background-color: $light-color;
+          display: flex inline;
+          align-items: center;
+          width: fit-content;
+        }
       }
 
       h1,
