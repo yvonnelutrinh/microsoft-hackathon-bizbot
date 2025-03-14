@@ -1,8 +1,14 @@
-# React + Vite
+**BizBot.AI**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Boost Efficiency. Cut Costs. Grow Smarter with AI.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Presented by: Team Overclocked
+Yvonne L., Vivian C., Toshi B., Quynh D., Midé A., Alex B., Brigid C.
+
+---
+
+BizBot.AI provides AI-powered recommendations tailored to small business needs. Leverages Microsoft’s Copilot to help businesses automate tasks, optimize operations, and make smarter decisions.
+
+Features include personalized business insights, Microsoft tool recommendations, and action plans to improve productivity. With ethical concerns, inclusivity and bias being major issues, incorporating explainable AI will aid to build user trust.
