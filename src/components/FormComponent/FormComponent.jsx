@@ -32,7 +32,6 @@ function FormComponent({ handleSubmit, loading }) {
   const [annualRevenue, setAnnualRevenue] = useState("");
   const [timeConsumingTasks, setTimeConsumingTasks] = useState("");
   const [currentSoftware, setCurrentSoftware] = useState(softwares);
-  const [currentSoftware, setCurrentSoftware] = useState(softwares);
   const [budgetForAI, setBudgetForAI] = useState("");
 
   const businessTypes = [
@@ -87,24 +86,11 @@ function FormComponent({ handleSubmit, loading }) {
 		});
 	};
 
-  //set software state checkboxes
-  const handleOnChangeCheckBox = (e) => {
-    setCurrentSoftware((pre) => {
-      let filteredPre = pre.filter((sw) => sw.name !== e.target.name);
-      filteredPre.push({
-        name: e.target.name,
-        checked: e.target.checked,
-      });
-      return filteredPre;
-    });
-  };
-
   return (
-    <>
-      <>
+      
       <div className = "page">
       <Link to="/" className="page_link" style={{ position: "absolute", left: `${leftPosition}px` }}><img className="page_link_logo" src="/src/assets/LogoSmall.png" alt="Logo"/></Link>        
-        <div className="page" className ="page_front">
+        <div className="page page_front">
             <div className="page_front">
               <h1>Small Business AI Advisor</h1>
               <p>Get tailored AI recommendations for your small business</p>
@@ -232,7 +218,7 @@ function FormComponent({ handleSubmit, loading }) {
           </button>
         </div>
       </div>
-    </>
+      </div>
   );
 }
 
