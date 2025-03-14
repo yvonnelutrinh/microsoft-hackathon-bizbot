@@ -14,6 +14,12 @@ $element-spacing: 20px;
   max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+  display: flex;
+  background-color: $primary-blue;
+
+  .logo {
+    height: 10rem;
+  }
 
   h1,
   h2,

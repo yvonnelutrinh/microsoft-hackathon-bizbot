@@ -138,6 +138,7 @@ export default function ReportComponent({ result, onRegenerate }) {
   
   return (
     <div className="report-container">
+      <img className="logo" src="/src/assets/LogoSmall.png" alt="Logo" />
       <div className={`report ${animate ? "fade-in" : ""}`}>
         <div className="report-header">
           <h1>your custom report</h1>
