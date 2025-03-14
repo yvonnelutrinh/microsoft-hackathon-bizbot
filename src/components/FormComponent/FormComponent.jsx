@@ -154,12 +154,22 @@ function FormComponent({ handleSubmit, loading }) {
         </div>
 
         <div className = "main_title_section_software">
-          <label className = "main_title_section_software_title">Current Software/Tools</label>
-          <textarea className = "main_title_section_software_title"
-            value={currentSoftware}
-            onChange={(e) => setCurrentSoftware(e.target.value)}
-            placeholder="List software you currently use (e.g., Excel, QuickBooks, Outlook)"
-          />
+          <label className = "main_title_section_software_title">Current Software/Tools: </label>
+           {currentSoftware
+						?.sort((a, b) => a.name.localeCompare(b.name))
+						.map((sw, i) => (
+							<label key={i}>
+								<input
+                className="main_title_section_software_title"
+									type="checkbox"
+									name={sw.name}
+									checked={sw.checked}
+									onChange={handleOnChangeCheckBox}
+								/>
+								{sw.name}
+							</label>
+						))}
+          
         </div>
       </div>
       <button
