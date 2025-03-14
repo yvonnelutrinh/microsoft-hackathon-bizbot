@@ -78,13 +78,13 @@ function FormComponent({ handleSubmit, loading }) {
       {" "}
       <h1>Small Business AI Advisor</h1>
       <p>Get tailored AI recommendations for your small business</p>
-      <div>
-        <h2>Tell us about your business</h2>
+      <div className = "main">
+        <h2 className = "main_title">Tell us about your business</h2>
 
-        <div>
-          <div>
-            <label>Business Type</label>
-            <select
+        <div className = "main_title_section">
+          <div className = "main_title_section_Business">
+            <label className = "main_title_section_Business_title" >Business Type</label>
+            <select className = "main_title_section_Business_select"
               value={businessType}
               onChange={(e) => setBusinessType(e.target.value)}
             >
@@ -96,10 +96,9 @@ function FormComponent({ handleSubmit, loading }) {
               ))}
             </select>
           </div>
-
-          <div>
-            <label>Number of Employees</label>
-            <select
+          <div className = "main_title_section_time">
+            <label className = "main_title_section_employee_title">Number of Employees</label>
+            <select className = "main_title_section_employee_select"
               value={employeeCount}
               onChange={(e) => setEmployeeCount(e.target.value)}
             >
@@ -114,9 +113,9 @@ function FormComponent({ handleSubmit, loading }) {
         </div>
 
         <div>
-          <div>
-            <label>Annual Revenue</label>
-            <select
+          <div className = "main_title_section_time">
+            <label className = "main_title_section_revenue_title" >Annual Revenue</label>
+            <select className = "main_title_section_revenue_select"
               value={annualRevenue}
               onChange={(e) => setAnnualRevenue(e.target.value)}
             >
@@ -126,12 +125,12 @@ function FormComponent({ handleSubmit, loading }) {
                   {range}
                 </option>
               ))}
-            </select>
+            </select >
           </div>
 
-          <div>
-            <label>Budget for AI Solutions</label>
-            <select
+          <div className = "main_title_section_time">
+            <label className = "main_title_section_solutions_title" >Budget for AI Solutions</label>
+            <select className = "main_title_section_solutions_select"
               value={budgetForAI}
               onChange={(e) => setBudgetForAI(e.target.value)}
             >
@@ -145,30 +144,22 @@ function FormComponent({ handleSubmit, loading }) {
           </div>
         </div>
 
-        <div>
-          <label>Most Time-Consuming Tasks</label>
-          <textarea
+        <div className = "main_title_section_time">
+          <label className = "main_title_section_time_title">Most Time-Consuming Tasks</label>
+          <textarea className = "main_title_section_time_select"
             value={timeConsumingTasks}
             onChange={(e) => setTimeConsumingTasks(e.target.value)}
             placeholder="Describe your 3 most time-consuming business tasks (e.g., invoicing, inventory management, customer support)"
           />
         </div>
 
-        <div>
-          <label>Current Software/Tools</label>
-          {currentSoftware
-						?.sort((a, b) => a.name.localeCompare(b.name))
-						.map((sw, i) => (
-							<label key={i}>
-								<input
-									type="checkbox"
-									name={sw.name}
-									checked={sw.checked}
-									onChange={handleOnChangeCheckBox}
-								/>
-								{sw.name}
-							</label>
-						))}
+        <div className = "main_title_section_software">
+          <label className = "main_title_section_software_title">Current Software/Tools</label>
+          <textarea className = "main_title_section_software_title"
+            value={currentSoftware}
+            onChange={(e) => setCurrentSoftware(e.target.value)}
+            placeholder="List software you currently use (e.g., Excel, QuickBooks, Outlook)"
+          />
         </div>
       </div>
       <button

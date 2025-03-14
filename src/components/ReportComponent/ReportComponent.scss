@@ -11,14 +11,13 @@ $element-spacing: 20px;
   font-family: "Inter", sans-serif;
   line-height: 1.6;
   color: $black;
-  max-width: 900px;
-  margin: 0 auto;
   padding: 20px;
   display: flex;
+  justify-content: center;
   background-color: $primary-blue;
 
   .logo {
-    height: 10rem;
+    height: 25vh;
   }
 
   h1,
@@ -53,6 +52,7 @@ $element-spacing: 20px;
   }
 
   .report {
+    max-width: 900px;
     background-color: $primary-blue;
     color: $white;
     border-radius: 8px;
