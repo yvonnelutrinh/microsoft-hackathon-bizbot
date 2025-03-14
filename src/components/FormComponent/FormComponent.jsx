@@ -11,7 +11,7 @@ function FormComponent({ handleSubmit, loading }) {
 		{ name: "OneDrive", checked: false },
 		{ name: "Excel", checked: false },
 		{ name: "OneNote", checked: false },
-		{ name: "Team", checked: false },
+		{ name: "Teams", checked: false },
 	];
   const [leftPosition, setLeftPosition] = useState(
     Math.max(((window.innerWidth - 1024 -272) / 4) , 0)
