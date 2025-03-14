@@ -1,26 +1,72 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./GeminiTest.scss";
 import FormComponent from "../FormComponent/FormComponent";
 import ReportComponent from "../ReportComponent/ReportComponent";
+import Loading from "../Loading/Loading";
+
 export default function GeminiTest({ model }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState("");
+  const [businessParams, setBusinessParams] = useState(null);
+  const [showForm, setShowForm] = useState(true);
+ 
+  const buildPrompt = (businessData, isRegenerate = false) => {
+    let prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
+            
+            ${businessData}
+    
+    Format the response using clear section separators with structured HTML:
 
-  const analyzeWithGemini = async ({
-    businessType,
-    employeeCount,
-    annualRevenue,
-    budgetForAI,
-    timeConsumingTasks,
-    currentSoftware,
-  }) => {
-    setLoading(true);
-    setError("");
-    setResult("");
+    <div class="report-section">
+      <h2>Overview of Business Needs</h2>
+      <!-- Business overview content here -->
+    </div>
 
-    // Compile the business data
-    const businessData = `
+    <div class="report-section">
+      <h2>Top 3 AI Opportunities</h2>
+      <!-- AI opportunities content here -->
+    </div>
+
+    <div class="report-section">
+      <h2>Recommended Microsoft Tools</h2>
+      <!-- Microsoft tools recommendations here -->
+    </div>
+
+    <div class="report-section">
+      <h2>Expected Benefits & ROI</h2>
+      <!-- Benefits and ROI content here -->
+    </div>
+
+    <div class="report-section">
+      <h2>Simple Implementation Steps</h2>
+      <!-- Implementation steps here -->
+    </div>
+
+    Use <ul>, <ol>, and <li> for lists. Return a valid HTML structure without markdown or backticks.
+    Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type.`;
+
+    // Add more tailored instructions for regeneration
+    if (isRegenerate) {
+      prompt += `
+      
+      Please provide a more tailored and specific response with more concrete examples relevant to this specific business type and needs. Go deeper into industry-specific use cases and provide more detailed implementation steps.`;
+    }
+
+    return prompt;
+  };
+
+  const formatBusinessData = (params) => {
+    const {
+      businessType,
+      employeeCount,
+      annualRevenue,
+      budgetForAI,
+      timeConsumingTasks,
+      currentSoftware,
+    } = params;
+
+    return `
       Business Type: ${businessType}
       Employee Count: ${employeeCount}
       Annual Revenue: ${annualRevenue}
@@ -32,44 +78,25 @@ export default function GeminiTest({ model }) {
       Current Software/Tools:
       ${currentSoftware}
     `;
+  };
 
+  const analyzeWithGemini = async (params, isRegenerate = false) => {
     try {
-      const prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
-              
-              ${businessData}
-              
-              Structure your response with these sections:
-              1. Overview of Business Needs
-              2. Top 3 AI Opportunities
-              3. Recommended Microsoft Tools (be specific with product names do not be generic)
-              4. Expected Benefits & ROI
-              5. Simple Implementation Steps
-              6. Microsoft Resources for Ethical AI Use
-              
-              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources. Return your response in a valid div element that can be directly injected into html do not prompt the response with "html".  Formatting Rules:
+      setLoading(true);
+      setShowForm(false);
+      setError("");
 
-Do not use triple backticks or markdown (\`\`\`html).
-Use <div style="font-weight: bold"> instead of asterisks (**text**).
-Return clean HTML without unnecessary wrapping or extra formatting.
-Use <ul> or <ol> along with <li> tags when for listing things. Very important!!
-Make use of headings You have a h1 which is great but you want to add a h2 also to highlight important tasks. Very important!!
-              
-              Add this to your response format in html too:
-              Microsoft is deeply committed to developing and deploying AI responsibly, guided by a set of ethical principles. Here are some key aspects of their approach:
-              Responsible AI Principles
-              Microsoft's AI development is anchored in six core principles:
-              Fairness: Ensuring AI systems treat all users equitably.
-              Reliability and Safety: Building AI that operates safely and reliably in all scenarios.
-              Privacy and Security: Protecting user data and ensuring secure AI systems.
-              Inclusiveness: Designing AI to empower and include people of all abilities.
-              Transparency: Making AI systems understandable and their decisions explainable.
-              Accountability: Ensuring humans remain in control and accountable for AI systems.
-              Governance and Oversight Microsoft has established internal frameworks like the Responsible AI Standard and committees such as Aether (AI and Ethics in Engineering and Research) to guide ethical AI practices. These frameworks ensure that AI systems are designed, tested, and deployed responsibly.
-              AI for Good Initiatives Microsoft actively uses AI to address societal challenges, such as environmental sustainability, accessibility, and cultural preservation, through programs like AI for Good Labs. You can explore more about their policies and initiatives on their official page. Let me know if you'd like to dive deeper into any specific aspect!
-              `;
+      // Store params for potential regeneration
+      if (!isRegenerate) {
+        setBusinessParams(params);
+      }
 
+      const businessData = formatBusinessData(params);
+      const prompt = buildPrompt(businessData, isRegenerate);
+      
+      console.log("Sending prompt to Gemini:", businessData);
+      
       const response = await model.generateContent(prompt);
-
       const data = response.response.text();
       setResult(data);
     } catch (err) {
@@ -80,15 +107,31 @@ Make use of headings You have a h1 which is great but you want to add a h2 also 
     }
   };
 
+  const handleRegenerate = () => {
+    if (businessParams) {
+      analyzeWithGemini(businessParams, true);
+    }
+  };
+
+  const renderContent = () => {
+    if (error) {
+      return <div className="error-message">There was an error getting a response. Please try again.</div>;
+    }
+    
+    if (loading) {
+      return <Loading />;
+    }
+    
+    if (result) {
+      return <ReportComponent result={result} onRegenerate={handleRegenerate} />;
+    }
+    
+    return <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />;
+  };
+
   return (
-    <div>
-      {error ? (
-        "There was an error getting a response please try again"
-      ) : result ? (
-        <ReportComponent result={result} />
-      ) : (
-        <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />
-      )}
+    <div className="gemini-test-container">
+      {renderContent()}
     </div>
   );
 }

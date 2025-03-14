@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./FormComponent.scss";
 
 function FormComponent({ handleSubmit, loading }) {
-  // Small business specific fields
+
   // Small business specific fields
   const [businessType, setBusinessType] = useState("");
   const [employeeCount, setEmployeeCount] = useState("");
@@ -141,7 +141,19 @@ function FormComponent({ handleSubmit, loading }) {
           />
         </div>
       </div>
-      <button onClick={handleSubmit} disabled={loading || !isFormValid()}>
+      <button
+        onClick={() =>
+          handleSubmit({
+            businessType,
+            employeeCount,
+            annualRevenue,
+            budgetForAI,
+            timeConsumingTasks,
+            currentSoftware,
+          })
+        }
+        disabled={loading || !isFormValid()}
+      >
         {loading ? "Generating Recommendations..." : "Get AI Recommendations"}
       </button>
     </div>
