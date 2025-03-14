@@ -1,6 +1,119 @@
-.main_title{
-    font-size: 72px;
+$form-bg: #f8f9fa;
+$input-bg: #cfdee7;
+$button-primary: #4267b2;
+$button-secondary: #ffffff;
+$text-color: #333;
+$border-radius: 10px;
+$main-title-color: #0047ab;
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 6vh;
+  text-align: center;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: $main-title-color;
 }
+.main {
+  background: none;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+
+  &_title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 15px;
+  }
+
+  &_title_section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: $main-title-color;
+    font-weight: bold;
+
+    &_Business,
+    &_time,
+    &_revenue,
+    &_solutions,
+    &_software {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 2px;
+
+      title {
+        padding: 10px 0;
+      }
+
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: $border-radius;
+        background: $input-bg;
+        font-size: 16px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &_software {
+    margin-top: 15px;
+
+    &_title {
+      font-weight: bold;
+      font-size: 16px;
+      color: $main-title-color;
+      margin-bottom: 5px;
+    }
+
+    textarea {
+      min-height: 100px;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+
+  button {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: $button-primary;
+    color: white;
+    transition: background 0.3s ease-in-out;
+    margin-top: 12px;
+
+    &:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: darken($button-primary, 10%);
+    }
+  }
+}
+
 .main{
     
 }
