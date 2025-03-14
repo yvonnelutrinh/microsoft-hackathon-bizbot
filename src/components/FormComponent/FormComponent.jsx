@@ -2,13 +2,23 @@ import { useState } from "react";
 import "./FormComponent.scss";
 
 function FormComponent({ handleSubmit, loading }) {
+  const softwares = [
+		{ name: "Outlook", checked: false },
+		{ name: "Word", checked: false },
+		{ name: "PowerPoint", checked: false },
+		{ name: "SharePoint", checked: false },
+		{ name: "OneDrive", checked: false },
+		{ name: "Excel", checked: false },
+		{ name: "OneNote", checked: false },
+		{ name: "Team", checked: false },
+	];
 
   // Small business specific fields
   const [businessType, setBusinessType] = useState("");
   const [employeeCount, setEmployeeCount] = useState("");
   const [annualRevenue, setAnnualRevenue] = useState("");
   const [timeConsumingTasks, setTimeConsumingTasks] = useState("");
-  const [currentSoftware, setCurrentSoftware] = useState("");
+  const [currentSoftware, setCurrentSoftware] = useState(softwares);
   const [budgetForAI, setBudgetForAI] = useState("");
 
   const businessTypes = [
@@ -50,6 +60,18 @@ function FormComponent({ handleSubmit, loading }) {
       budgetForAI
     );
   };
+
+  	//set software state checkboxes --Vivian
+	const handleOnChangeCheckBox = (e) => {
+		setCurrentSoftware((pre) => {
+			let filteredPre = pre.filter((sw) => sw.name !== e.target.name);
+			filteredPre.push({
+				name: e.target.name,
+				checked: e.target.checked,
+			});
+			return filteredPre;
+		});
+	};
 
   return (
     <div>
@@ -134,11 +156,19 @@ function FormComponent({ handleSubmit, loading }) {
 
         <div>
           <label>Current Software/Tools</label>
-          <textarea
-            value={currentSoftware}
-            onChange={(e) => setCurrentSoftware(e.target.value)}
-            placeholder="List software you currently use (e.g., Excel, QuickBooks, Outlook)"
-          />
+          {currentSoftware
+						?.sort((a, b) => a.name.localeCompare(b.name))
+						.map((sw, i) => (
+							<label key={i}>
+								<input
+									type="checkbox"
+									name={sw.name}
+									checked={sw.checked}
+									onChange={handleOnChangeCheckBox}
+								/>
+								{sw.name}
+							</label>
+						))}
         </div>
       </div>
       <button
