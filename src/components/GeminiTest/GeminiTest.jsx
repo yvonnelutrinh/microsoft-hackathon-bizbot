@@ -1,51 +1,20 @@
 import React, { useState } from "react";
 import "./GeminiTest.scss";
-
-
+import FormComponent from "../FormComponent/FormComponent";
+import ReportComponent from "../ReportComponent/ReportComponent";
 export default function GeminiTest({ model }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState("");
 
-  // Small business specific fields
-  const [businessType, setBusinessType] = useState("");
-  const [employeeCount, setEmployeeCount] = useState("");
-  const [annualRevenue, setAnnualRevenue] = useState("");
-  const [timeConsumingTasks, setTimeConsumingTasks] = useState("");
-  const [currentSoftware, setCurrentSoftware] = useState("");
-  const [budgetForAI, setBudgetForAI] = useState("");
-
-  const businessTypes = [
-    "Retail",
-    "Restaurant",
-    "Professional Services",
-    "Healthcare",
-    "Construction",
-    "Manufacturing",
-    "E-commerce",
-    "Salon/Spa",
-    "Other",
-  ];
-
-  const employeeRanges = ["1-5", "6-10", "11-25", "26-50", "51-100", "100+"];
-
-  const revenueRanges = [
-    "Under $100k",
-    "$100k-$500k",
-    "$500k-$1M",
-    "$1M-$5M",
-    "$5M+",
-  ];
-
-  const budgetRanges = [
-    "Under $1k",
-    "$1k-$5k",
-    "$5k-$10k",
-    "$10k-$25k",
-    "$25k+",
-  ];
-
-  const analyzeWithGemini = async () => {
+  const analyzeWithGemini = async ({
+    businessType,
+    employeeCount,
+    annualRevenue,
+    budgetForAI,
+    timeConsumingTasks,
+    currentSoftware,
+  }) => {
     setLoading(true);
     setError("");
     setResult("");
@@ -65,154 +34,60 @@ export default function GeminiTest({ model }) {
     `;
 
     try {
-        const prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
+      const prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
               
               ${businessData}
               
               Structure your response with these sections:
               1. Overview of Business Needs
               2. Top 3 AI Opportunities
-              3. Recommended Microsoft Tools (be specific with product names)
+              3. Recommended Microsoft Tools (be specific with product names do not be generic)
               4. Expected Benefits & ROI
               5. Simple Implementation Steps
               6. Microsoft Resources for Ethical AI Use
               
-              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources.`
-      
-              const response = await model.generateContent(prompt);
+              Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type. Include links to Microsoft's ethical AI resources. Return your response in a valid div element that can be directly injected into html do not prompt the response with "html".  Formatting Rules:
+
+Do not use triple backticks or markdown (\`\`\`html).
+Use <div style="font-weight: bold"> instead of asterisks (**text**).
+Return clean HTML without unnecessary wrapping or extra formatting.
+Use <ul> or <ol> along with <li> tags when for listing things. Very important!!
+Make use of headings You have a h1 which is great but you want to add a h2 also to highlight important tasks. Very important!!
+              
+              Add this to your response format in html too:
+              Microsoft is deeply committed to developing and deploying AI responsibly, guided by a set of ethical principles. Here are some key aspects of their approach:
+              Responsible AI Principles
+              Microsoft's AI development is anchored in six core principles:
+              Fairness: Ensuring AI systems treat all users equitably.
+              Reliability and Safety: Building AI that operates safely and reliably in all scenarios.
+              Privacy and Security: Protecting user data and ensuring secure AI systems.
+              Inclusiveness: Designing AI to empower and include people of all abilities.
+              Transparency: Making AI systems understandable and their decisions explainable.
+              Accountability: Ensuring humans remain in control and accountable for AI systems.
+              Governance and Oversight Microsoft has established internal frameworks like the Responsible AI Standard and committees such as Aether (AI and Ethics in Engineering and Research) to guide ethical AI practices. These frameworks ensure that AI systems are designed, tested, and deployed responsibly.
+              AI for Good Initiatives Microsoft actively uses AI to address societal challenges, such as environmental sustainability, accessibility, and cultural preservation, through programs like AI for Good Labs. You can explore more about their policies and initiatives on their official page. Let me know if you'd like to dive deeper into any specific aspect!
+              `;
+
+      const response = await model.generateContent(prompt);
 
       const data = response.response.text();
       setResult(data);
     } catch (err) {
+      console.error(`Error: ${err.message}`);
       setError(`Error: ${err.message}`);
     } finally {
       setLoading(false);
     }
   };
 
-  const isFormValid = () => {
-    return (
-      businessType &&
-      employeeCount &&
-      annualRevenue &&
-      timeConsumingTasks &&
-      budgetForAI
-    );
-  };
-
   return (
     <div>
-      <h1>Small Business AI Advisor</h1>
-      <p>Get tailored AI recommendations for your small business</p>
-
-      <div>
-        <h2>Tell us about your business</h2>
-
-        <div>
-          <div>
-            <label>Business Type</label>
-            <select
-              value={businessType}
-              onChange={(e) => setBusinessType(e.target.value)}
-            >
-              <option value="">Select business type</option>
-              {businessTypes.map((type) => (
-                <option key={type} value={type}>
-                  {type}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label>Number of Employees</label>
-            <select
-              value={employeeCount}
-              onChange={(e) => setEmployeeCount(e.target.value)}
-            >
-              <option value="">Select range</option>
-              {employeeRanges.map((range) => (
-                <option key={range} value={range}>
-                  {range}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <div>
-            <label>Annual Revenue</label>
-            <select
-              value={annualRevenue}
-              onChange={(e) => setAnnualRevenue(e.target.value)}
-            >
-              <option value="">Select range</option>
-              {revenueRanges.map((range) => (
-                <option key={range} value={range}>
-                  {range}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div>
-            <label>Budget for AI Solutions</label>
-            <select
-              value={budgetForAI}
-              onChange={(e) => setBudgetForAI(e.target.value)}
-            >
-              <option value="">Select budget range</option>
-              {budgetRanges.map((range) => (
-                <option key={range} value={range}>
-                  {range}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label>Most Time-Consuming Tasks</label>
-          <textarea
-            value={timeConsumingTasks}
-            onChange={(e) => setTimeConsumingTasks(e.target.value)}
-            placeholder="Describe your 3 most time-consuming business tasks (e.g., invoicing, inventory management, customer support)"
-          />
-        </div>
-
-        <div>
-          <label>Current Software/Tools</label>
-          <textarea
-            value={currentSoftware}
-            onChange={(e) => setCurrentSoftware(e.target.value)}
-            placeholder="List software you currently use (e.g., Excel, QuickBooks, Outlook)"
-          />
-        </div>
-      </div>
-
-      <button onClick={analyzeWithGemini} disabled={loading || !isFormValid()}>
-        {loading ? "Generating Recommendations..." : "Get AI Recommendations"}
-      </button>
-
-      {error && <div>{error}</div>}
-
-      {result && (
-        <div>
-          <h2>Your AI Recommendations</h2>
-          <div>{result}</div>
-          <div>
-            <button
-              onClick={() => {
-                navigator.clipboard.writeText(result);
-                alert("Report copied to clipboard!");
-              }}
-            >
-              Copy Report
-            </button>
-            <button onClick={() => window.print()}>Print Report</button>
-          </div>
-        </div>
+      {error ? (
+        "There was an error getting a response please try again"
+      ) : result ? (
+        <ReportComponent result={result} />
+      ) : (
+        <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />
       )}
     </div>
   );
