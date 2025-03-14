@@ -1,4 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+// Variables
+$primary-blue: #0A369D;
+$light-blue: #4472CA;
+$white: #ffffff;
+$light-gray: #f5f7fa;
+$medium-gray: #F3F9FD;
+$dark-gray: #555;
+$black: #222;
+
+// Mixins
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+// General Spacing
+$header-padding: 16px;
+$list-padding: 12px;
+$section-padding: 24px;
+$element-spacing: 20px;
+
 * {
-    margin: 0;
-    box-sizing: border-box;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+  

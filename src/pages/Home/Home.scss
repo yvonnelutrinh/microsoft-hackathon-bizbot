@@ -1,0 +1,390 @@
+// Variables
+$primary-color: #0047ab; // Royal blue like in your mockup
+$secondary-color: #4682b4; // Steel blue
+$microsoft-blue: #0078D4;
+$accent-color: #3466ff; // Bright blue for buttons and highlights
+$text-color: #333333;
+$light-color: #ffffff; 
+$background-color: #f5f8fc;
+$container-width: 1200px;
+$border-radius: 1rem;
+$box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin container {
+  width: fit-content;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@mixin button {
+  background-color: $accent-color;
+  color: $light-color;
+  border: none;
+  border-radius: $border-radius;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}
+
+@mixin section-padding {
+  padding: 80px 0;
+}
+
+@mixin section-container {
+  @include container;
+  @include flex-column;
+  gap: 2rem;
+}
+
+@mixin list-style {
+  list-style-position: inside;
+  padding-left: 0;
+
+  li {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    position: relative;
+    // padding-left: 10px;
+  }
+}
+
+// Global styles
+.home {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: $text-color;
+  background-color: $background-color;
+  line-height: 1.6;
+
+  .cta-button {
+    @include button;
+  }
+
+  @mixin text-color-dark-section {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      color: $light-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: $background-color;
+      }
+    }
+
+    i {
+      display: block;
+      font-style: italic;
+      color: $background-color;
+      margin-top: 1.5rem;
+    }
+  }
+
+  h1,
+  h2 {
+    color: $primary-color;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background-color: $accent-color;
+    }
+  }
+
+  i {
+    display: block;
+    font-style: italic;
+    color: $secondary-color;
+    margin-top: 1.5rem;
+    font-size: 1.75rem;
+  }
+  li {
+    font-size: 1.15rem;
+  }
+  // Home page styles
+  .home {
+    @include flex-column;
+
+    &__landing {
+      background-color: $primary-color;
+      color: $light-color;
+      min-height: 80vh;
+      @include flex-center;
+      padding: 2rem;
+
+      text-align: center;
+      gap: 3rem;
+
+      &-inner {
+        @include flex-column;
+        align-items: center;
+        height: 100%;
+
+        .brand-name {
+          color: $microsoft-blue;
+          padding: .75rem .75rem;
+          margin: .25rem .5rem;
+          border-radius: 1.5rem;
+          background-color: $light-color;
+          display: flex inline;
+          align-items: center;
+          width: fit-content;
+        }
+      }
+
+      h1,
+      p {
+        color: $light-color;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        @include button;
+        padding: 16px 32px;
+        font-size: 1.2rem;
+        background-color: $light-color;
+        color: $primary-color;
+
+        &:hover {
+          background-color: darken($light-color, 10%);
+        }
+      }
+    }
+
+    &__logo {
+      width: 35%;
+      margin-bottom: 2rem;
+
+      img {
+        max-width: 35vw;
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+
+  // Section styles
+  .section {
+    &__1,
+    &__2,
+    &__3,
+    &__4 {
+      width: 100%;
+      padding: 2.5rem 0;
+    }
+    &__1-inner,
+    &__2-inner,
+    &__3-inner,
+    &__4-inner {
+      @include section-padding;
+      @include section-container;
+    }
+
+    &__1 {
+      background-color: $light-color;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+
+        li {
+          &::before {
+            content: "✓";
+            color: $accent-color;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__2 {
+      background-color: $primary-color;
+      color: $light-color;
+      @include text-color-dark-section;
+
+      ol {
+        @include list-style;
+        list-style-type: none;
+        counter-reset: section-counter;
+
+        li {
+          counter-increment: section-counter;
+
+          &::before {
+            content: counter(section-counter);
+            background-color: $light-color;
+            color: $accent-color;
+            border-radius: 0.5rem;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__3 {
+      background-color: $light-color;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+
+        li {
+          background-color: $accent-color;
+          color: $light-color;
+          padding: 1rem 1.5rem 1.5rem;
+          border-radius: $border-radius;
+          box-shadow: $box-shadow;
+
+          &::before {
+            content: "•";
+            color: $background-color;
+            font-size: 1.5rem;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__4 {
+      background-color: $primary-color;
+      @include text-color-dark-section;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+        max-width: 600px;
+        //   margin: 0 auto;
+        color: $light-color;
+        text-align: left;
+
+        li {
+          &::before {
+            content: "→";
+            color: $background-color;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .cta-button {
+        @include button;
+        //   margin-top: 2rem;
+        text-align: center;
+        margin: 0 auto;
+        padding: 16px 32px;
+        font-size: 1.2rem;
+        width: 80%;
+      }
+
+      i {
+        margin-bottom: 1rem;
+      }
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    .home__landing {
+      padding: 3rem 1rem;
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+    }
+
+    .section__3 ul {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .home__landing {
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+
+    .section__1,
+    .section__2,
+    .section__3,
+    .section__4 {
+      padding: 40px 0;
+    }
+  }
+}

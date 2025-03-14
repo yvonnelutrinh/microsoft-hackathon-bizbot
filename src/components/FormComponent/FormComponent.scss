@@ -1,0 +1,172 @@
+$form-bg: #f8f9fa;
+$input-bg: #cfdee7;
+$button-primary: #4267b2;
+$button-secondary: #ffffff;
+$text-color: #333;
+$border-radius: 10px;
+$main-title-color: #0047ab;
+
+h1 {
+  padding-top: 40px;
+  color: $main-title-color;
+}
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 6vh;
+  text-align: center;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: $main-title-color;
+}
+.main {
+  font-family: "Inter", sans-serif;
+  background: none;
+  padding: 20px;
+  border-radius: 15px;
+  max-width: 600px;
+  margin: auto;
+
+  &_title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: $text-color;
+    margin-bottom: 15px;
+    
+  }
+
+  &_title_section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: $main-title-color;
+    font-weight: bold;
+
+    &_Business,
+    &_time,
+    &_revenue,
+    &_solutions,
+    &_software {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 2px;
+      text-align: left;
+
+      title {
+        padding: 10px 0;
+      }
+
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: $border-radius;
+        background: $input-bg;
+        font-size: 16px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        cursor: pointer;
+      }
+    }
+  }
+  // &_title {
+  //   font-weight: bold;
+  //   font-size: 16px;
+  //   color: $main-title-color;
+  //   margin-bottom: 5px;
+  // }
+
+  &_software {
+    margin-top: 15px;
+
+
+    textarea {
+      min-height: 100px;
+      font-family: "Inter", sans-serif;
+    }
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+
+  button {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    background: $button-primary;
+    color: white;
+    transition: background 0.3s ease-in-out;
+    margin-top: 12px;
+
+    &:disabled {
+      background: gray;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: darken($button-primary, 10%);
+    }
+  }
+}
+.logo {
+  height: 25vh;
+}
+ 
+label {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #0047ab;
+  font-weight: bold;
+}
+.main_title{
+    font-size: 32px;
+    font-family: "Inter", sans-serif;
+}
+.main{
+    
+}
+.main_title_section_Business_title{
+    font-size: 31px;    
+}
+.page{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding-top:72px;
+    background-color: #0A369D;
+    position: relative;
+    &_link{
+        &_logo {
+          max-width:210px;
+          width: auto;
+          height: auto;
+        }
+      }
+
+    &_front{
+        background-color: white;
+        border-radius: 2px  ;
+        width: 1024px;
+        font-family: "Inter", sans-serif;
+        text-align: center;
+    }
+    
+    &_front{
+        background-color: white;
+        border-radius: 2px  ;
+
+    }
+}
