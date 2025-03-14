@@ -10,7 +10,7 @@ function FormComponent({ handleSubmit, loading }) {
 		{ name: "OneDrive", checked: false },
 		{ name: "Excel", checked: false },
 		{ name: "OneNote", checked: false },
-		{ name: "Team", checked: false },
+		{ name: "Teams", checked: false },
 	];
 
   // Small business specific fields

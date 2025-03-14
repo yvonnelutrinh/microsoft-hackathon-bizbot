@@ -10,7 +10,7 @@ export default function GeminiTest({ model }) {
   const [result, setResult] = useState("");
   const [businessParams, setBusinessParams] = useState(null);
   const [showForm, setShowForm] = useState(true);
- 
+
   const buildPrompt = (businessData, isRegenerate = false) => {
     let prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
             
@@ -88,7 +88,6 @@ export default function GeminiTest({ model }) {
   };
 
   const analyzeWithGemini = async (params, isRegenerate = false) => {
-
     try {
       setLoading(true);
       setShowForm(false);
@@ -96,14 +95,18 @@ export default function GeminiTest({ model }) {
 
       // Store params for potential regeneration
       if (!isRegenerate) {
-        setBusinessParams({...params, currentSoftware: softwaresInString(params.currentSoftware)});
+        setBusinessParams({
+          ...params,
+          currentSoftwareString: softwaresInString(params.currentSoftware),
+          currentSoftware: [...params.currentSoftware], // Store a copy of the original array
+        });
       }
 
       const businessData = formatBusinessData(params);
       const prompt = buildPrompt(businessData, isRegenerate);
-      
+
       console.log("Sending prompt to Gemini:", businessData);
-      
+
       const response = await model.generateContent(prompt);
       const data = response.response.text();
       setResult(data);
@@ -123,23 +126,25 @@ export default function GeminiTest({ model }) {
 
   const renderContent = () => {
     if (error) {
-      return <div className="error-message">There was an error getting a response. Please try again.</div>;
+      return (
+        <div className="error-message">
+          There was an error getting a response. Please try again.
+        </div>
+      );
     }
-    
+
     if (loading) {
       return <Loading />;
     }
-    
+
     if (result) {
-      return <ReportComponent result={result} onRegenerate={handleRegenerate} />;
+      return (
+        <ReportComponent result={result} onRegenerate={handleRegenerate} />
+      );
     }
-    
+
     return <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />;
   };
 
-  return (
-    <div className="gemini-test-container">
-      {renderContent()}
-    </div>
-  );
+  return <div className="gemini-test-container">{renderContent()}</div>;
 }
