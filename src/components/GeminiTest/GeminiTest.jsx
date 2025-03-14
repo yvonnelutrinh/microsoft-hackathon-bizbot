@@ -3,16 +3,17 @@ import "./GeminiTest.scss";
 import FormComponent from "../FormComponent/FormComponent";
 import ReportComponent from "../ReportComponent/ReportComponent";
 import Loading from "../Loading/Loading";
+import { useRef } from "react";
 
 export default function GeminiTest({ model }) {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [result, setResult] = useState("");
-  const [businessParams, setBusinessParams] = useState(null);
-  const [showForm, setShowForm] = useState(true);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const [result, setResult] = useState("");
+	//const [businessParams, setBusinessParams] = useState(null);
+	const businessParamsRef = useRef(null);
 
-  const buildPrompt = (businessData, isRegenerate = false) => {
-    let prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
+	const buildPrompt = (businessData, isRegenerate = false) => {
+		let prompt = `You are a small business AI consultant. Analyze this small business data and provide practical recommendations for AI integration to save time and money:
             
             ${businessData}
     
@@ -46,34 +47,34 @@ export default function GeminiTest({ model }) {
     Use <ul>, <ol>, and <li> for lists. Return a valid HTML structure without markdown or backticks.
     Focus on affordable, practical solutions for small businesses. Be specific about which Microsoft tools and services would be most helpful for this business type.`;
 
-    // Add more tailored instructions for regeneration
-    if (isRegenerate) {
-      prompt += `
+		// Add more tailored instructions for regeneration
+		if (isRegenerate) {
+			prompt += `
       
       Please provide a more tailored and specific response with more concrete examples relevant to this specific business type and needs. Go deeper into industry-specific use cases and provide more detailed implementation steps.`;
-    }
+		}
 
-    return prompt;
-  };
+		return prompt;
+	};
 
-  const softwaresInString = (currentSoftware) =>
-    currentSoftware.reduce(
-      (total, current) =>
-        current.checked ? `${total} ${current.name}` : total,
-      ""
-    );
+	const softwaresInString = (currentSoftware) =>
+		currentSoftware.reduce(
+			(total, current) =>
+				current.checked ? `${total} ${current.name}` : total,
+			""
+		);
 
-  const formatBusinessData = (params) => {
-    const {
-      businessType,
-      employeeCount,
-      annualRevenue,
-      budgetForAI,
-      timeConsumingTasks,
-      currentSoftware,
-    } = params;
+	const formatBusinessData = (params) => {
+		const {
+			businessType,
+			employeeCount,
+			annualRevenue,
+			budgetForAI,
+			timeConsumingTasks,
+			currentSoftware,
+		} = params;
 
-    return `
+		return `
       Business Type: ${businessType}
       Employee Count: ${employeeCount}
       Annual Revenue: ${annualRevenue}
@@ -85,66 +86,70 @@ export default function GeminiTest({ model }) {
       Current Software/Tools:
       ${softwaresInString(currentSoftware)}
     `;
-  };
+	};
 
-  const analyzeWithGemini = async (params, isRegenerate = false) => {
-    try {
-      setLoading(true);
-      setShowForm(false);
-      setError("");
+	const analyzeWithGemini = async (params, isRegenerate = false) => {
+		try {
+			setLoading(true);
+			setError("");
 
-      // Store params for potential regeneration
-      if (!isRegenerate) {
-        setBusinessParams({
-          ...params,
-          currentSoftwareString: softwaresInString(params.currentSoftware),
-          currentSoftware: [...params.currentSoftware], // Store a copy of the original array
-        });
-      }
+			// Store params for potential regeneration
+			// if (!isRegenerate) {
+			// setBusinessParams({
+			// 	...params,
+			// 	currentSoftwareString: softwaresInString(params.currentSoftware),
+			// 	currentSoftware: [...params.currentSoftware], // Store a copy of the original array
+			// });
+			// }
 
-      const businessData = formatBusinessData(params);
-      const prompt = buildPrompt(businessData, isRegenerate);
+			// Store params for potential regeneration
+			if (!isRegenerate) businessParamsRef.current = params;
 
-      console.log("Sending prompt to Gemini:", businessData);
+			//format the params return from form
+			const businessData = formatBusinessData(params);
+			const prompt = buildPrompt(businessData, isRegenerate);
 
-      const response = await model.generateContent(prompt);
-      const data = response.response.text();
-      setResult(data);
-    } catch (err) {
-      console.error(`Error: ${err.message}`);
-      setError(`Error: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+			console.log("Sending prompt to Gemini:", businessData);
 
-  const handleRegenerate = () => {
-    if (businessParams) {
-      analyzeWithGemini(businessParams, true);
-    }
-  };
+			const response = await model.generateContent(prompt);
+			const data = response.response.text();
 
-  const renderContent = () => {
-    if (error) {
-      return (
-        <div className="error-message">
-          There was an error getting a response. Please try again.
-        </div>
-      );
-    }
+			setResult(data);
+		} catch (err) {
+			console.error(`Error: ${err.message}`);
+			setError(`Error: ${err.message}`);
+		} finally {
+			setLoading(false);
+		}
+	};
 
-    if (loading) {
-      return <Loading />;
-    }
+	const handleRegenerate = () => {
+		if (businessParamsRef.current) {
+			analyzeWithGemini(businessParamsRef.current, true);
+		}
+	};
 
-    if (result) {
-      return (
-        <ReportComponent result={result} onRegenerate={handleRegenerate} />
-      );
-    }
+	const renderContent = () => {
+		if (error) {
+			return (
+				<div className="error-message">
+					There was an error getting a response. Please try again.
+				</div>
+			);
+		}
 
-    return <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />;
-  };
+		if (loading) {
+			return <Loading />;
+		}
 
-  return <div className="gemini-test-container">{renderContent()}</div>;
+		if (result) {
+			return (
+				<ReportComponent result={result} onRegenerate={handleRegenerate} />
+			);
+		}
+
+		return <FormComponent handleSubmit={analyzeWithGemini} loading={loading} />;
+	};
+
+	return <div className="gemini-test-container">{renderContent()}</div>;
 }

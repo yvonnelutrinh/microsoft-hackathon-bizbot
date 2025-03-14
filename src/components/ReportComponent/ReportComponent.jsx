@@ -1,27 +1,27 @@
 import "./ReportComponent.scss";
 import MicrosoftEthicalAI from "../MicrosoftEthicalAi/MicrosoftEthicalAi";
 import { useRef, useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 export default function ReportComponent({ result, onRegenerate }) {
-  const [animate, setAnimate] = useState(false);
-  const ethicalAIRef = useRef(null);
+	const [animate, setAnimate] = useState(false);
+	const ethicalAIRef = useRef(null);
 
-  useEffect(() => {
-    // Trigger animation after the component mounts or updates
-    setTimeout(() => {
-      setAnimate(true);
-    }, 100); // Delay ensures smoother effect
-  }, [result]); // Re-run animation when `result` changes
+	useEffect(() => {
+		// Trigger animation after the component mounts or updates
+		setTimeout(() => {
+			setAnimate(true);
+		}, 100); // Delay ensures smoother effect
+	}, [result]); // Re-run animation when `result` changes
 
-  const createMarkup = () => ({ __html: result });
+	const createMarkup = () => ({ __html: result });
 
-  const handlePrint = () => {
-    const ethicalAIContent = ethicalAIRef.current
-      ? ethicalAIRef.current.innerHTML
-      : "";
+	const handlePrint = () => {
+		const ethicalAIContent = ethicalAIRef.current
+			? ethicalAIRef.current.innerHTML
+			: "";
 
-    const printContent = document.createElement("div");
-    printContent.innerHTML = `
+		const printContent = document.createElement("div");
+		printContent.innerHTML = `
       <html>
         <head>
           <title>AI Adoption Recommendations</title>
@@ -125,51 +125,52 @@ export default function ReportComponent({ result, onRegenerate }) {
       </html>
     `;
 
-    const printWindow = window.open("", "_blank");
-    printWindow.document.write(printContent.innerHTML);
-    printWindow.document.close();
-    printWindow.onload = function () {
-      printWindow.focus();
-      printWindow.print();
-      printWindow.close();
-    };
-  };
-  
-  
-  return (
-    <div className="report-container">
-      <Link to={"/"}><img className="logo" src="/src/assets/LogoSmall.png" alt="Logo" /></Link>
-      <div className={`report ${animate ? "fade-in" : ""}`}>
-        <div className="report-header">
-          <h1>Your custom report</h1>
-        </div>
-        <div className="report-content">
-          <div
-            className={`ai-content ${animate ? "fade-in" : ""}`}
-            dangerouslySetInnerHTML={createMarkup()}
-          />
-          <div
-            ref={ethicalAIRef}
-            className={`ethical-ai ${animate ? "fade-in" : ""}`}
-          >
-            <MicrosoftEthicalAI />
-          </div>
-          <div className="report-footer">
-            <button
-              className={`secondary ${animate ? "fade-in" : ""}`}
-              onClick={onRegenerate}
-            >
-              Re-generate
-            </button>
-            <button
-              className={`primary ${animate ? "fade-in" : ""}`}
-              onClick={handlePrint}
-            >
-              Print Report
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+		const printWindow = window.open("", "_blank");
+		printWindow.document.write(printContent.innerHTML);
+		printWindow.document.close();
+		printWindow.onload = function () {
+			printWindow.focus();
+			printWindow.print();
+			printWindow.close();
+		};
+	};
+
+	return (
+		<div className="report-container">
+			<Link to={"/"}>
+				<img className="logo" src="/src/assets/LogoSmall.png" alt="Logo" />
+			</Link>
+			<div className={`report ${animate ? "fade-in" : ""}`}>
+				<div className="report-header">
+					<h1>Your custom report</h1>
+				</div>
+				<div className="report-content">
+					<div
+						className={`ai-content ${animate ? "fade-in" : ""}`}
+						dangerouslySetInnerHTML={createMarkup()}
+					/>
+					<div
+						ref={ethicalAIRef}
+						className={`ethical-ai ${animate ? "fade-in" : ""}`}
+					>
+						<MicrosoftEthicalAI />
+					</div>
+					<div className="report-footer">
+						<button
+							className={`secondary ${animate ? "fade-in" : ""}`}
+							onClick={onRegenerate}
+						>
+							Re-generate
+						</button>
+						<button
+							className={`primary ${animate ? "fade-in" : ""}`}
+							onClick={handlePrint}
+						>
+							Print Report
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }
