@@ -72,18 +72,52 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   color: $text-color;
   background-color: $background-color;
   line-height: 1.6;
-}
 
-.cta-button {
-  @include button;
-}
+  .cta-button {
+    @include button;
+  }
 
-@mixin text-color-dark-section {
+  @mixin text-color-dark-section {
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      color: $light-color;
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background-color: $background-color;
+      }
+    }
+
+    i {
+      display: block;
+      font-style: italic;
+      color: $background-color;
+      margin-top: 1.5rem;
+    }
+  }
+
+  h1,
+  h2 {
+    color: $primary-color;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
   h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
     position: relative;
-    color: $light-color;
 
     &::after {
       content: "";
@@ -92,289 +126,255 @@ $box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       left: 0;
       width: 60px;
       height: 4px;
-      background-color: $background-color;
+      background-color: $accent-color;
     }
   }
 
   i {
     display: block;
     font-style: italic;
-    color: $background-color;
+    color: $secondary-color;
     margin-top: 1.5rem;
+    font-size: 1.75rem;
   }
-}
-
-h1,
-h2 {
-  color: $primary-color;
-  line-height: 1.2;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background-color: $accent-color;
-  }
-}
-
-i {
-  display: block;
-  font-style: italic;
-  color: $secondary-color;
-  margin-top: 1.5rem;
-  font-size: 1.75rem;
-}
-li {
+  li {
     font-size: 1.15rem;
-}
-// Home page styles
-.home {
-  @include flex-column;
+  }
+  // Home page styles
+  .home {
+    @include flex-column;
 
-  &__landing {
-    background-color: $primary-color;
-    color: $light-color;
-    min-height: 80vh;
-    @include flex-center;
-    padding: 2rem;
-    // position: relative;
-    // overflow: hidden;
-
-    text-align: center;
-    gap: 3rem;
-
-    &-inner {
-      @include flex-column;
-      align-items: center;
-      height: 100%;
-    }
-
-    h1,
-    p {
+    &__landing {
+      background-color: $primary-color;
       color: $light-color;
-      max-width: 800px;
-      margin: 0 auto;
-    }
+      min-height: 80vh;
+      @include flex-center;
+      padding: 2rem;
+      // position: relative;
+      // overflow: hidden;
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
-
-    .cta-button {
-      @include button;
-      padding: 16px 32px;
-      font-size: 1.2rem;
-      background-color: $light-color;
-      color: $primary-color;
-
-      &:hover {
-        background-color: darken($light-color, 10%);
-      }
-    }
-  }
-
-  &__logo {
-    max-width: 35%;
-    margin-bottom: 2rem;
-
-    img {
-      max-width: 35vw;
-      width: auto;
-      height: auto;
-    }
-  }
-}
-
-// Section styles
-.section {
-  &__1,
-  &__2,
-  &__3,
-  &__4 {
-    width: 100%;
-    padding: 2.5rem 0;
-  }
-  &__1-inner,
-  &__2-inner,
-  &__3-inner,
-  &__4-inner {
-    @include section-padding;
-    @include section-container;
-  }
-
-  &__1 {
-    background-color: $light-color;
-
-    ul {
-      @include list-style;
-      list-style-type: none;
-
-      li {
-        &::before {
-          content: "✓";
-          color: $accent-color;
-          margin-right: 10px;
-        }
-      }
-    }
-  }
-
-  &__2 {
-    background-color: $primary-color;
-    color: $light-color;
-    @include text-color-dark-section;
-
-    ol {
-      @include list-style;
-      list-style-type: none;
-      counter-reset: section-counter;
-
-      li {
-        counter-increment: section-counter;
-
-        &::before {
-          content: counter(section-counter);
-          background-color: $light-color;
-          color: $accent-color;
-          border-radius: 0.5rem;
-          width: 28px;
-          height: 28px;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          margin-right: 10px;
-        }
-      }
-    }
-  }
-
-  &__3 {
-    background-color: $light-color;
-
-    ul {
-      @include list-style;
-      list-style-type: none;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-
-      li {
-        background-color: $accent-color;
-        color: $light-color;
-        padding: 1rem 1.5rem 1.5rem;
-        border-radius: $border-radius;
-        box-shadow: $box-shadow;
-
-        &::before {
-          content: "•";
-          color: $background-color;
-          font-size: 1.5rem;
-          margin-right: 10px;
-        }
-      }
-    }
-  }
-
-  &__4 {
-    background-color: $primary-color;
-    @include text-color-dark-section;
-
-    ul {
-      @include list-style;
-      list-style-type: none;
-      max-width: 600px;
-      //   margin: 0 auto;
-      color: $light-color;
-      text-align: left;
-
-      li {
-        &::before {
-          content: "→";
-          color: $background-color;
-          margin-right: 10px;
-        }
-      }
-    }
-
-    .cta-button {
-      @include button;
-      //   margin-top: 2rem;
       text-align: center;
-      margin: 0 auto;
-      padding: 16px 32px;
-      font-size: 1.2rem;
-      width: 80%;
+      gap: 3rem;
+
+      &-inner {
+        @include flex-column;
+        align-items: center;
+        height: 100%;
+      }
+
+      h1,
+      p {
+        color: $light-color;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .cta-button {
+        @include button;
+        padding: 16px 32px;
+        font-size: 1.2rem;
+        background-color: $light-color;
+        color: $primary-color;
+
+        &:hover {
+          background-color: darken($light-color, 10%);
+        }
+      }
     }
 
-    i {
-      margin-bottom: 1rem;
+    &__logo {
+      max-width: 35%;
+      margin-bottom: 2rem;
+
+      img {
+        max-width: 35vw;
+        width: auto;
+        height: auto;
+      }
     }
   }
-}
 
-// Responsive styles
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
+  // Section styles
+  .section {
+    &__1,
+    &__2,
+    &__3,
+    &__4 {
+      width: 100%;
+      padding: 2.5rem 0;
+    }
+    &__1-inner,
+    &__2-inner,
+    &__3-inner,
+    &__4-inner {
+      @include section-padding;
+      @include section-container;
+    }
+
+    &__1 {
+      background-color: $light-color;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+
+        li {
+          &::before {
+            content: "✓";
+            color: $accent-color;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__2 {
+      background-color: $primary-color;
+      color: $light-color;
+      @include text-color-dark-section;
+
+      ol {
+        @include list-style;
+        list-style-type: none;
+        counter-reset: section-counter;
+
+        li {
+          counter-increment: section-counter;
+
+          &::before {
+            content: counter(section-counter);
+            background-color: $light-color;
+            color: $accent-color;
+            border-radius: 0.5rem;
+            width: 28px;
+            height: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__3 {
+      background-color: $light-color;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+
+        li {
+          background-color: $accent-color;
+          color: $light-color;
+          padding: 1rem 1.5rem 1.5rem;
+          border-radius: $border-radius;
+          box-shadow: $box-shadow;
+
+          &::before {
+            content: "•";
+            color: $background-color;
+            font-size: 1.5rem;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+
+    &__4 {
+      background-color: $primary-color;
+      @include text-color-dark-section;
+
+      ul {
+        @include list-style;
+        list-style-type: none;
+        max-width: 600px;
+        //   margin: 0 auto;
+        color: $light-color;
+        text-align: left;
+
+        li {
+          &::before {
+            content: "→";
+            color: $background-color;
+            margin-right: 10px;
+          }
+        }
+      }
+
+      .cta-button {
+        @include button;
+        //   margin-top: 2rem;
+        text-align: center;
+        margin: 0 auto;
+        padding: 16px 32px;
+        font-size: 1.2rem;
+        width: 80%;
+      }
+
+      i {
+        margin-bottom: 1rem;
+      }
+    }
   }
 
-  h2 {
-    font-size: 1.6rem;
-  }
-
-  .home__landing {
-    padding: 3rem 1rem;
-
+  // Responsive styles
+  @media (max-width: 768px) {
     h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
 
-    p {
-      font-size: 1rem;
+    h2 {
+      font-size: 1.6rem;
     }
 
-    button {
-      padding: 12px 24px;
-      font-size: 1rem;
+    .home__landing {
+      padding: 3rem 1rem;
+
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+    }
+
+    .section__3 ul {
+      grid-template-columns: 1fr;
     }
   }
 
-  .section__3 ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .home__landing {
-    h1 {
-      font-size: 1.8rem;
+  @media (max-width: 480px) {
+    .home__landing {
+      h1 {
+        font-size: 1.8rem;
+      }
     }
-  }
 
-  .section__1,
-  .section__2,
-  .section__3,
-  .section__4 {
-    padding: 40px 0;
+    .section__1,
+    .section__2,
+    .section__3,
+    .section__4 {
+      padding: 40px 0;
+    }
   }
 }
