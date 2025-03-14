@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./FormComponent.scss";
-
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
 function FormComponent({ handleSubmit, loading }) {
   const softwares = [
 		{ name: "Outlook", checked: false },
@@ -12,7 +13,19 @@ function FormComponent({ handleSubmit, loading }) {
 		{ name: "OneNote", checked: false },
 		{ name: "Teams", checked: false },
 	];
+  const [leftPosition, setLeftPosition] = useState(
+    Math.max(((window.innerWidth - 1024 -272) / 4) , 0)
+  );
+  useEffect(() => {
+    const handleResize = () => {
+      setLeftPosition(Math.max((window.innerWidth - 1024) / 4, 0));
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   // Small business specific fields
   const [businessType, setBusinessType] = useState("");
   const [employeeCount, setEmployeeCount] = useState("");
@@ -76,6 +89,7 @@ function FormComponent({ handleSubmit, loading }) {
   return (
     <>
       <div className = "page">
+      <Link to="/" className="page_link" style={{ position: "absolute", left: `${leftPosition}px` }}><img className="page_link_logo" src="/src/assets/LogoSmall.png" alt="Logo"/></Link>        
         <div className ="page_front">
           {" "}
           <h1>Small Business AI Advisor</h1>
