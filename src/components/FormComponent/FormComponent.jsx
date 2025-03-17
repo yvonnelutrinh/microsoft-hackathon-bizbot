@@ -113,8 +113,8 @@ function FormComponent({ handleSubmit, loading }) {
         {/* ✅ Dynamically update title based on input */}
         <h1>
           {businessType
-            ? `BIZBOT.AI Advisor for ${businessType}`
-            : "BIZBOT.AI - Small Business AI Advisor"}
+            ? `BizBot.AI Advisor for ${businessType}`
+            : "BizBot.AI - Small Business AI Advisor"}
         </h1>
 
         <p>

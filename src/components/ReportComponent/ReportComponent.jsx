@@ -144,7 +144,7 @@ export default function ReportComponent({ result, onRegenerate }) {
       <Link to={`${BASE_URL}`}><img className="logo" src={robot} alt="Logo" /></Link>
       <div className={`report ${animate ? "fade-in" : ""}`}>
         <div className="report-header">
-          <h1>Your BIZBOT.AI Adoption Report</h1>
+          <h1>Your BizBot.AI Adoption Report</h1>
         </div>
         <div className="report-content">
           <div
