@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./FormComponent.scss";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../App";
+import robot from "../../assets/LogoSmall.png"
+
 function FormComponent({ handleSubmit, loading }) {
   const softwares = [
 		{ name: "Outlook", checked: false },
@@ -102,7 +105,7 @@ function FormComponent({ handleSubmit, loading }) {
     <>
     <div className="page">
       {/* ✅ Dynamically adjust width */}
-      <Link to={"/"}><img src="/src/assets/LogoSmall.png" className="logo"></img></Link>
+      <Link to={`${BASE_URL}`}><img src={robot}className="logo"></img></Link>
       <div 
         className="page_front" 
         style={{ width: `${pageWidth}px` }}

@@ -2,6 +2,9 @@ import "./ReportComponent.scss";
 import MicrosoftEthicalAI from "../MicrosoftEthicalAi/MicrosoftEthicalAi";
 import { useRef, useEffect, useState } from "react";
 import {Link} from "react-router-dom";
+import { BASE_URL } from "../../App";
+import robot from "../../assets/LogoSmall.png"
+
 export default function ReportComponent({ result, onRegenerate }) {
   const [animate, setAnimate] = useState(false);
   const ethicalAIRef = useRef(null);
@@ -138,7 +141,7 @@ export default function ReportComponent({ result, onRegenerate }) {
   
   return (
     <div className="report-container">
-      <Link to={"/"}><img className="logo" src="/src/assets/LogoSmall.png" alt="Logo" /></Link>
+      <Link to={`${BASE_URL}`}><img className="logo" src={robot} alt="Logo" /></Link>
       <div className={`report ${animate ? "fade-in" : ""}`}>
         <div className="report-header">
           <h1>Your BIZBOT.AI Adoption Report</h1>

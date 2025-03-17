@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.scss";
+import robot from "../../assets/LogoHuge.png"
+import { BASE_URL } from "../../App";
+
 function Home() {
   return (
     <main className="home">
       <div className="home__landing">
         <div className="home__logo">
-          <img src="/src/assets/LogoHuge.png" alt="" />
+          <img src={robot} alt="robot logo" />
         </div>
         <div className="home__landing-inner">
           <h1>
@@ -19,7 +22,7 @@ function Home() {
             you time, and increase profitability—all within the Microsoft
             ecosystem.
           </p>
-          <Link className="cta-button cta-button--2" to={"/report"}>
+          <Link className="cta-button cta-button--2" to={`${BASE_URL}report`}>
             Get Your Free AI Report
           </Link>
         </div>
@@ -134,7 +137,7 @@ function Home() {
             AI adoption doesn’t have to be complicated. Let’s make it work for
             you.
           </i>
-          <Link className="cta-button cta-button--2" to={"/report"}>
+          <Link className="cta-button cta-button--2" to={`${BASE_URL}report`}>
             Generate Your Free AI Report
           </Link>
         </div>
