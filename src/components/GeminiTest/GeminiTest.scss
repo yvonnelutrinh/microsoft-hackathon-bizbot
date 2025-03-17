@@ -1,13 +1,15 @@
+@use "../../App.scss" as *;
 button {
+    font-family: "Poppins", sans-serif;
     padding: 11px 22px;
     border: 1px solid gray;
-    background-color: white;
+    background-color: $primary-blue;
     border-radius: 999em;
     transition: background-color 0.3s ease;
-    color: gray;
-    // @include LabelTablet;
+    color: white;
+
     &:hover {
-        background-color: #4472CA;
+        background-color: $light-blue;
         color: white;
     }
 }
