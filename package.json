@@ -1,6 +1,6 @@
 {
-  "name": "industry-project-team2",
-  "private": true,
+  "name": "microsoft-hackathon-bizbot",
+  "homepage": "https://yvonnelutrinh.github.io/microsoft-hackathon-bizbot",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
