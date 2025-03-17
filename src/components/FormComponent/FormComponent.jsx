@@ -110,7 +110,7 @@ function FormComponent({ handleSubmit, loading }) {
         {/* ✅ Dynamically update title based on input */}
         <h1>
           {businessType
-            ? `AI Advisor for ${businessType}`
+            ? `BIZBOT.AI Advisor for ${businessType}`
             : "BIZBOT.AI - Small Business AI Advisor"}
         </h1>
 
@@ -217,9 +217,8 @@ function FormComponent({ handleSubmit, loading }) {
               {currentSoftware
                 ?.sort((a, b) => a.name.localeCompare(b.name))
                 .map((sw, i) => (
-                  <label key={i}>
+                  <label key={i} className="main_title_section_software_options">
                     <input
-                    className="main_title_section_software_title"
                       type="checkbox"
                       name={sw.name}
                       checked={sw.checked}
