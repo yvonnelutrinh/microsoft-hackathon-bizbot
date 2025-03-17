@@ -39,8 +39,6 @@ jobs:
           VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
       - name: Install dependencies
         run: npm ci
-      - name: test
-        run: echo "test" && $VITE_GEMINI_API_KEY
       - name: Build
         env:
           VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
