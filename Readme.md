@@ -2,15 +2,17 @@
 
 Boost Efficiency. Cut Costs. Grow Smarter with AI.
 
+BizBot.AI provides AI-powered recommendations tailored to small business needs. Leverages Gemini API to help businesses automate tasks, optimize operations, and make smarter decisions.
+
+Features include:
+- Personalized business form to handle prompting
+- Customized AI adoption plan
+- Microsoft tool recommendations and resources
+
+
+Created for a 24-hour hackathon (BrainStation x Microsoft Industry Project) by Yvonne L., Vivian C., Toshi B., Quynh D., Midé A., Alex B., Brigid C.
+
 ---
-
-Presented by: Team Overclocked
-Yvonne L., Vivian C., Toshi B., Quynh D., Midé A., Alex B., Brigid C.
-
----
-BizBot.AI provides AI-powered recommendations tailored to small business needs. Leverages Microsoft’s Copilot to help businesses automate tasks, optimize operations, and make smarter decisions.
-
-Features include personalized business insights, Microsoft tool recommendations, and action plans to improve productivity. With ethical concerns, inclusivity and bias being major issues, incorporating explainable AI will aid to build user trust.
 
 ## Initial setup
 ```
@@ -18,6 +20,6 @@ Features include personalized business insights, Microsoft tool recommendations,
 npm install
 npm run dev
 ```
-## Tech Stack
+## Tech stack
 - React, HTML5, JavaScript (ES6+), SCSS
 - Gemini API
